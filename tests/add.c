@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <libmake/header.h>
+#include <libtest/header.h>
 
 int main(void)
 {
