@@ -1,6 +1,8 @@
 .POSIX:
 .SUFFIXES:
 
+DESTDIR  =
+PREFIX   = /usr/local
 TARGET   = libtest.a
 BUILDDIR = build
 CC       = clang
@@ -20,6 +22,15 @@ clean:
 	rm -rf $(BUILDDIR) src/*.o src/*.d tests/*.o tests/*.d $(test_apps)
 
 test: run_tests
+
+install: $(BUILDDIR)/$(TARGET)
+	mkdir -p $(DESTDIR)$(PREFIX)/include $(DESTDIR)$(PREFIX)/lib
+	cp -r include/libtest $(DESTDIR)$(PREFIX)/include
+	cp $(BUILDDIR)/$(TARGET) $(DESTDIR)$(PREFIX)/lib
+
+uninstall:
+	rm -rf $(DESTDIR)$(PREFIX)/include/libtest
+	rm -rf $(DESTDIR)$(PREFIX)/lib/$(TARGET)
 
 ###############################################################################
 # Private Stuff
