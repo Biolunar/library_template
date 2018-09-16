@@ -4,7 +4,7 @@
 TARGET   = libtest.a
 BUILDDIR = build
 CC       = clang
-CFLAGS   = -std=c17 -pedantic-errors -g -Weverything -Iinclude
+CFLAGS   = -std=c17 -pedantic-errors -g -Weverything
 AR       = ar
 ARFLAGS  = rcs
 
@@ -27,7 +27,7 @@ test: run_tests
 builddir = $(BUILDDIR)/.empty
 
 $(builddir):
-	mkdir -p $(BUILDDIR)
+	mkdir $(BUILDDIR)
 	touch $@
 
 ###############################################################################
@@ -37,7 +37,7 @@ $(builddir):
 
 .SUFFIXES: .c .o
 .c.o:
-	$(CC) $(CFLAGS) -c -MMD -o $@ $<
+	$(CC) $(CFLAGS) -c -MMD -I include -o $@ $<
 
 $(BUILDDIR)/$(TARGET): $(builddir) $(objects)
 	$(AR) $(ARFLAGS) -o $@ $(objects)
@@ -49,4 +49,4 @@ $(test_apps): $(BUILDDIR)/$(TARGET)
 
 .SUFFIXES: .o
 .o:
-	$(CC) $(CFLAGS) -o $@ $< $(BUILDDIR)/$(TARGET)
+	$(CC) $(CFLAGS) -I include -o $@ $< $(BUILDDIR)/$(TARGET)
