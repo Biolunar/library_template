@@ -38,7 +38,7 @@ uninstall:
 builddir = $(BUILDDIR)/.empty
 
 $(builddir):
-	mkdir $(BUILDDIR)
+	mkdir -p $(BUILDDIR)
 	touch $@
 
 ###############################################################################
