@@ -1,14 +1,8 @@
 .POSIX:
 .SUFFIXES:
 
-DESTDIR  =
-PREFIX   = /usr/local
-TARGET   = libtest.a
-BUILDDIR = build
-CC       = clang
-CFLAGS   = -std=c17 -pedantic-errors -g -Weverything
-AR       = ar
-ARFLAGS  = rcs
+CONFIG = config.mk
+include $(CONFIG)
 
 ###############################################################################
 # General Commands
